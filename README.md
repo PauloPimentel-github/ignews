@@ -1,2 +1,2 @@
 # ignews
-Projeto do terceiro módulo curso Ignite de React (Rocketseat)
+Projeto do terceiro módulo do curso Ignite de React (Rocketseat)
