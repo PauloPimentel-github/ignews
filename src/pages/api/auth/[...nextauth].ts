@@ -13,18 +13,31 @@ export default NextAuth({
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
     })
   ],
-  jwt: {
-    secret: process.env.SIGNING_KEY 
-  },
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
-      const userEmail  = user.email
+      const userEmail = user.email
 
       try { 
         await fauna.query(
-          query.Create(
-            query.Collection('users'),
-            { data: { email: userEmail } }
+          query.If(
+            query.Not(
+              query.Exists(
+                query.Match(
+                  query.Index('user_by_email'),
+                  query.Casefold(userEmail)
+                )
+              )
+            ),
+            query.Create(
+              query.Collection('users'),
+              { data: { email: userEmail } }
+            ),
+            query.Get(
+              query.Match(
+                query.Index('user_by_email'),
+                query.Casefold(userEmail)
+              )
+            )
           )
         )
 
