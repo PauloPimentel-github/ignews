@@ -15,7 +15,7 @@ describe('Posts page', () => {
         expect(screen.getByText("My new Post")).toBeInTheDocument()
     })
 
-    it('loads initial dara', async () => {
+    it('loads initial data', async () => {
         const getPrismicClientMocked = mocked(getPrismicClient)
 
         getPrismicClientMocked.mockReturnValueOnce({
