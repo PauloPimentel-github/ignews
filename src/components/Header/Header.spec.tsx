@@ -24,10 +24,12 @@ describe('Header component', () => {
         render(
             <Header />
         )
+
+        screen.logTestingPlaygroundURL()
     
         //debug()
         expect(screen.getByText('Home')).toBeInTheDocument()
-        //expect(screen.getByText('Posts')).toBeInTheDocument()
+        expect(screen.getByText('Posts')).toBeInTheDocument()
     })
 
 })
